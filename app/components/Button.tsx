@@ -6,18 +6,18 @@ import { IconType } from "react-icons";
 interface ButtonProps {
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
-  outline?: boolean;
+  icon?: IconType;
   small?: boolean;
-  icon: IconType;
+  outline?: boolean;
+  disabled?: boolean;
 }
 
 export default function Button({
   label,
   onClick,
-  disabled,
-  outline,
   small,
+  outline,
+  disabled,
   icon: Icon,
 }: ButtonProps): ReactElement {
   return (
