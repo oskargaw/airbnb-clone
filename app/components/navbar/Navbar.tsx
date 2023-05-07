@@ -1,7 +1,8 @@
 "use client";
 
 import { ReactElement } from "react";
-import { User } from "@prisma/client";
+
+import { SafeUser } from "@/app/types";
 
 import Logo from "./Logo";
 import Search from "./Search";
@@ -9,7 +10,7 @@ import UserMenu from "./UserMenu";
 import Container from "../Container";
 
 interface NavbarProps {
-  currentUser?: User | null;
+  currentUser?: SafeUser | null;
 }
 
 export default function Navbar({ currentUser }: NavbarProps): ReactElement {
