@@ -100,14 +100,14 @@ export default function LoginModal(): ReactElement {
         outline
         icon={FcGoogle}
         label="Continue with Google"
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
 
       <Button
         outline
         icon={AiFillGithub}
         label="Continue with Github"
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
 
       <div className="mt-4 text-center font-light text-neutral-500">

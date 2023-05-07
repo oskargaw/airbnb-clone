@@ -3,6 +3,7 @@
 import { ReactElement, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -91,14 +92,14 @@ export default function RegisterModal(): ReactElement {
         outline
         icon={FcGoogle}
         label="Continue with Google"
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
 
       <Button
         outline
         icon={AiFillGithub}
         label="Continue with Github"
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
 
       <div className="mt-4 text-center font-light text-neutral-500">
