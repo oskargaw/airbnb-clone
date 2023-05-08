@@ -8,6 +8,7 @@ import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 import Container from "../Container";
+import Categories from "./Categories";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
@@ -25,6 +26,8 @@ export default function Navbar({ currentUser }: NavbarProps): ReactElement {
           </div>
         </Container>
       </div>
+
+      <Categories />
     </div>
   );
 }
