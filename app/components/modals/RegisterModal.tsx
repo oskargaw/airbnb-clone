@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
+import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 
 import Modal from "./Modal";
@@ -21,6 +22,7 @@ export default function RegisterModal(): ReactElement {
 
   // Hooks
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
 
   const {
     register,
@@ -34,7 +36,7 @@ export default function RegisterModal(): ReactElement {
     },
   });
 
-  // Methods
+  // Functions
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
@@ -47,6 +49,11 @@ export default function RegisterModal(): ReactElement {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleToggleModal = () => {
+    registerModal.onClose();
+    loginModal.onOpen();
   };
 
   // Constants
@@ -107,7 +114,7 @@ export default function RegisterModal(): ReactElement {
           <div>Already have an account?</div>
 
           <div
-            onClick={registerModal.onClose}
+            onClick={handleToggleModal}
             className="cursor-pointer text-neutral-800 hover:underline"
           >
             Log in

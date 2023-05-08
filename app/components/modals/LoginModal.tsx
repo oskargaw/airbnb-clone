@@ -22,6 +22,7 @@ export default function LoginModal(): ReactElement {
 
   // Hooks
   const router = useRouter();
+
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
 
@@ -36,7 +37,13 @@ export default function LoginModal(): ReactElement {
     },
   });
 
-  // Methods
+  // Handlers
+  const handleToggleModal = () => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  };
+
+  // Functions
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
@@ -112,13 +119,13 @@ export default function LoginModal(): ReactElement {
 
       <div className="mt-4 text-center font-light text-neutral-500">
         <div className="flex flex-row items-center justify-center gap-2">
-          <div>Already have an account?</div>
+          <div>First time using Airbnb?</div>
 
           <div
-            onClick={registerModal.onClose}
+            onClick={handleToggleModal}
             className="cursor-pointer text-neutral-800 hover:underline"
           >
-            Log in
+            Create an account
           </div>
         </div>
       </div>
