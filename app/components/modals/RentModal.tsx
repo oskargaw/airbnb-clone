@@ -9,6 +9,7 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
+import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
 
 enum STEPS {
   CATEGORY = 0,
@@ -68,8 +69,16 @@ export default function RentModal(): ReactElement {
     [setCustomValue]
   );
 
+  const handleSetLocation = useCallback(
+    (location: CountrySelectValue) => {
+      setCustomValue("location", location);
+    },
+    [setCustomValue]
+  );
+
   // Constants
   const category = watch("category");
+  const location = watch("location");
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
@@ -95,30 +104,40 @@ export default function RentModal(): ReactElement {
     return onBack;
   }, [step]);
 
-  let bodyContent = useMemo(
-    () => (
+  let bodyContent = (
+    <div className="flex flex-col gap-8">
+      <Heading
+        title="Which of these best describes your place?"
+        subtitle="Pick a category"
+      />
+
+      <div className="grid max-h-[50vh] grid-cols-1 gap-3 overflow-y-auto md:grid-cols-2">
+        {categories.map(({ label, icon }) => (
+          <div key={label} className="col-span-1">
+            <CategoryInput
+              label={label}
+              icon={icon}
+              selected={category === label}
+              onClick={handleSetCategory}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Which of these best describes your place?"
-          subtitle="Pick a category"
+          title="Where is your place located?"
+          subtitle="Help guests find you!"
         />
 
-        <div className="grid max-h-[50vh] grid-cols-1 gap-3 overflow-y-auto md:grid-cols-2">
-          {categories.map(({ label, icon }) => (
-            <div key={label} className="col-span-1">
-              <CategoryInput
-                label={label}
-                icon={icon}
-                selected={category === label}
-                onClick={handleSetCategory}
-              />
-            </div>
-          ))}
-        </div>
+        <CountrySelect value={location} onChange={handleSetLocation} />
       </div>
-    ),
-    [category, handleSetCategory]
-  );
+    );
+  }
 
   return (
     <Modal
@@ -127,8 +146,8 @@ export default function RentModal(): ReactElement {
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       isOpen={rentModal.isOpen}
+      onSubmit={onNext}
       onClose={rentModal.onClose}
-      onSubmit={rentModal.onClose}
       secondaryAction={secondaryAction}
     />
   );
