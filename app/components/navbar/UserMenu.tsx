@@ -5,6 +5,7 @@ import { signOut } from "next-auth/react";
 import { AiOutlineMenu } from "react-icons/ai";
 
 import { SafeUser } from "@/app/types";
+import useRentModal from "@/app/hooks/useRentModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 
@@ -20,25 +21,34 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
   const [isOpen, setIsOpen] = useState(false);
 
   // Hooks
+  const rentModal = useRentModal();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
 
-  // Functions
-  const toggleOpen = () => setIsOpen((value) => !value);
+  // Handlers
+  const handleOpenMenu = () => setIsOpen((value) => !value);
+
+  const handleRentButtonClick = () => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    rentModal.onOpen();
+  };
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
           className="hidden cursor-pointer rounded-full px-4 py-3 text-sm font-semibold transition hover:bg-neutral-100 md:block"
-          onClick={() => {}}
+          onClick={handleRentButtonClick}
         >
           Airbnb your home
         </div>
 
         <div
           className="flex cursor-pointer flex-row items-center gap-3 rounded-full border-[1px] border-neutral-200 p-4 transition hover:shadow-md md:px-2 md:py-1"
-          onClick={toggleOpen}
+          onClick={handleOpenMenu}
         >
           <AiOutlineMenu />
 
@@ -57,7 +67,7 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
                 <MenuItem label="My favorites" onClick={() => {}} />
                 <MenuItem label="My reservations" onClick={() => {}} />
                 <MenuItem label="My properties" onClick={() => {}} />
-                <MenuItem label="Airbnb my home" onClick={() => {}} />
+                <MenuItem label="Airbnb my home" onClick={rentModal.onOpen} />
 
                 <hr />
 
