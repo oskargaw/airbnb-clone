@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactElement, useCallback, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { FieldValues, useForm } from "react-hook-form";
 
 import useRentModal from "@/app/hooks/useRentModal";
@@ -80,6 +81,14 @@ export default function RentModal(): ReactElement {
   const category = watch("category");
   const location = watch("location");
 
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("../Map"), {
+        ssr: false,
+      }),
+    [location]
+  );
+
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
       return "Create";
@@ -135,6 +144,8 @@ export default function RentModal(): ReactElement {
         />
 
         <CountrySelect value={location} onChange={handleSetLocation} />
+
+        <Map center={location?.latlng} />
       </div>
     );
   }
