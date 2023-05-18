@@ -9,7 +9,7 @@ const formattedCountries = countries.map((country) => ({
   region: country.region,
 }));
 
-const useCountries = () => {
+export default function useCountries() {
   // Functions
   const getAll = useCallback(() => formattedCountries, []);
 
@@ -21,6 +21,4 @@ const useCountries = () => {
     getAll,
     getByValue,
   };
-};
-
-export default useCountries;
+}
