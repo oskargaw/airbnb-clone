@@ -5,11 +5,10 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Range } from "react-date-range";
 import { useRouter } from "next/navigation";
-import { Reservation } from "@prisma/client";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 
-import { SafeListing, SafeUser } from "@/app/types";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 
 import Container from "../Container";
 import ListingHead from "./ListingHead";
@@ -27,7 +26,7 @@ interface ListingClientProps {
   listing: SafeListing & {
     user: SafeUser;
   };
-  reservations?: Reservation[];
+  reservations?: SafeReservation[];
   currentUser?: SafeUser | null;
 }
 
