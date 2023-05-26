@@ -57,7 +57,7 @@ export default function ListingClient({
     setIsLoading(true);
 
     try {
-      axios.post("/api/reservations", {
+      await axios.post("/api/reservations", {
         listingId: listing?.id,
         totalPrice,
         startDate: dateRange.startDate,
@@ -68,8 +68,7 @@ export default function ListingClient({
 
       setDateRange(initialDateRange);
 
-      // Redirect to /trips
-      router.refresh();
+      router.push("/trips");
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {

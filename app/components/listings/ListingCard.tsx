@@ -4,17 +4,16 @@ import { ReactElement, useMemo } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
-import { Reservation } from "@prisma/client";
 
 import useCountries from "@/app/hooks/useCountries";
-import { SafeListing, SafeUser } from "@/app/types";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 
 import Button from "../Button";
 import HeartButton from "../HeartButton";
 
 interface ListingCardProps {
   data: SafeListing;
-  reservation?: Reservation;
+  reservation?: SafeReservation;
   disabled?: boolean;
   actionId?: string;
   actionLabel?: string;

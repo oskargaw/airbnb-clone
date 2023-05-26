@@ -2,6 +2,7 @@
 
 import { ReactElement, useState } from "react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { AiOutlineMenu } from "react-icons/ai";
 
 import { SafeUser } from "@/app/types";
@@ -21,11 +22,16 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
   const [isOpen, setIsOpen] = useState(false);
 
   // Hooks
+  const router = useRouter();
   const rentModal = useRentModal();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
 
   // Handlers
+  const handleRedirectToTrips = () => {
+    router.push("/trips");
+  };
+
   const handleOpenMenu = () => setIsOpen((value) => !value);
 
   const handleRentButtonClick = () => {
@@ -63,7 +69,7 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
           <div className="flex cursor-pointer flex-col">
             {currentUser ? (
               <>
-                <MenuItem label="My trips" onClick={() => {}} />
+                <MenuItem label="My trips" onClick={handleRedirectToTrips} />
                 <MenuItem label="My favorites" onClick={() => {}} />
                 <MenuItem label="My reservations" onClick={() => {}} />
                 <MenuItem label="My properties" onClick={() => {}} />
