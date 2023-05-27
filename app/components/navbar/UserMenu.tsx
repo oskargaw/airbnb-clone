@@ -36,6 +36,10 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
     router.push("/reservations");
   };
 
+  const handleRedirectToFavorites = () => {
+    router.push("/favorites");
+  };
+
   const handleOpenMenu = () => setIsOpen((value) => !value);
 
   const handleRentButtonClick = () => {
@@ -74,7 +78,10 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
             {currentUser ? (
               <>
                 <MenuItem label="My trips" onClick={handleRedirectToTrips} />
-                <MenuItem label="My favorites" onClick={() => {}} />
+                <MenuItem
+                  label="My favorites"
+                  onClick={handleRedirectToFavorites}
+                />
                 <MenuItem
                   label="My reservations"
                   onClick={handleRedirectToReservations}
