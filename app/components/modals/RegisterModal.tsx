@@ -43,7 +43,9 @@ export default function RegisterModal(): ReactElement {
     try {
       await axios.post("/api/register", data);
 
+      toast.success("Success!");
       registerModal.onClose();
+      loginModal.onOpen();
     } catch (error) {
       toast.error("Something went wrong");
     } finally {

@@ -32,6 +32,10 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
     router.push("/trips");
   };
 
+  const handleRedirectToReservations = () => {
+    router.push("/reservations");
+  };
+
   const handleOpenMenu = () => setIsOpen((value) => !value);
 
   const handleRentButtonClick = () => {
@@ -71,7 +75,10 @@ export default function UserMenu({ currentUser }: UserMenuProps): ReactElement {
               <>
                 <MenuItem label="My trips" onClick={handleRedirectToTrips} />
                 <MenuItem label="My favorites" onClick={() => {}} />
-                <MenuItem label="My reservations" onClick={() => {}} />
+                <MenuItem
+                  label="My reservations"
+                  onClick={handleRedirectToReservations}
+                />
                 <MenuItem label="My properties" onClick={() => {}} />
                 <MenuItem label="Airbnb my home" onClick={rentModal.onOpen} />
 
