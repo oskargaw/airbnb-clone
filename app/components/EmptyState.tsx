@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement } from "react";
+import { ReactElement, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 import Button from "./Button";
@@ -20,6 +20,11 @@ export default function EmptyState({
   // Hooks
   const router = useRouter();
 
+  // Handlers
+  const handleRemoveAllFilters = useCallback(() => {
+    router.push("/");
+  }, [router]);
+
   return (
     <div className="flex h-[60vh] flex-col items-center justify-center gap-2">
       <Heading center title={title} subtitle={subtitle} />
@@ -29,7 +34,7 @@ export default function EmptyState({
           <Button
             outline
             label="Remove all filters"
-            onClick={() => router.push("/")}
+            onClick={handleRemoveAllFilters}
           />
         ) : null}
       </div>

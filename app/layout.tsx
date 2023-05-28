@@ -7,6 +7,7 @@ import ToasterProvider from "./providers/ToasterProvider";
 import Navbar from "./components/navbar/Navbar";
 import RentModal from "./components/modals/RentModal";
 import LoginModal from "./components/modals/LoginModal";
+import SearchModal from "./components/modals/SearchModal";
 import RegisterModal from "./components/modals/RegisterModal";
 
 export const metadata = {
@@ -31,6 +32,7 @@ export default async function RootLayout({
       <body className={font.className}>
         <ToasterProvider />
 
+        <SearchModal />
         <RentModal />
         <LoginModal />
         <RegisterModal />

@@ -77,28 +77,31 @@ export default function RentModal(): ReactElement {
     setStep((value) => value + 1);
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    if (step !== STEPS.PRICE) {
-      return onNext();
-    }
+  const onSubmit: SubmitHandler<FieldValues> = useCallback(
+    async (data) => {
+      if (step !== STEPS.PRICE) {
+        return onNext();
+      }
 
-    setIsLoading(true);
+      setIsLoading(true);
 
-    try {
-      await axios.post("/api/listings", data);
+      try {
+        await axios.post("/api/listings", data);
 
-      toast.success("Listing created!");
-      router.refresh();
-      reset();
-      setStep(STEPS.CATEGORY);
+        toast.success("Listing created!");
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
 
-      rentModal.onClose();
-    } catch (error) {
-      toast.error("Something went wrong.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+        rentModal.onClose();
+      } catch (error) {
+        toast.error("Something went wrong.");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [step, router, reset, rentModal]
+  );
 
   // Handlers
   const handleSetCategory = useCallback(
